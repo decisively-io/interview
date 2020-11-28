@@ -1,0 +1,45 @@
+{
+  "name": "@decisively/interview",
+  "version": "0.0.1",
+  "description": "Decisively Interview React SDK",
+  "repository": "git://github.com/imminently/decisively_interview.git",
+  "main": "dist/main.js",
+  "scripts": {
+    "build": "webpack --env=dev",
+    "build:prod": "webpack --env=prod",
+    "deploy": "yarn build:prod && yarn publish",
+    "lint": "eslint ./src --fix",
+    "watch:lint": "esw ./src --fix -w --ext .jsx",
+    "test": "NODE_ENV=test && jest  --forceExit",
+    "watch:test": "NODE_ENV=test && jest --watchAll",
+    "storybook": "start-storybook"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@babel/plugin-transform-runtime": "^7.12.1",
+    "@babel/preset-env": "^7.12.7",
+    "@babel/preset-react": "^7.12.7",
+    "babel-loader": "^8.2.1",
+    "babel-plugin-transform-imports": "^2.0.0",
+    "html-webpack-plugin": "^4.5.0",
+    "webpack": "^4.44.2",
+    "webpack-bundle-analyzer": "^3.9.0",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.12.1",
+    "moment": "^2.29.1",
+    "node-polyglot": "^2.4.0",
+    "prop-types": "^15.7.2",
+    "react-signature-canvas": "^1.0.3"
+  },
+  "peerDependencies": {
+    "@material-ui/core": "^4.11.1",
+    "@material-ui/lab": "^4.0.0-alpha.56",
+    "connected-react-router": "^6.8.0",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1",
+    "redux": "^4.0.5",
+    "redux-saga": "^1.1.3"
+  }
+}
