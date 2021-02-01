@@ -67,10 +67,10 @@ const SideWrapper = styled.div`
 `;
 
 const Interview = ({id}) => {
-  const [translateEl, setTranslateEl] = React.useState(null);
-  const [userLocale, setUserLocale] = React.useState(null);
+  //const [translateEl, setTranslateEl] = React.useState(null);
+  //const [userLocale, setUserLocale] = React.useState(null);
   const translate = useTranslate();
-  const setLocale = useSetLocale();
+  //const setLocale = useSetLocale();
 
   const dispatch = useDispatch();
   const interview = getInterviewHook(id);
@@ -78,20 +78,20 @@ const Interview = ({id}) => {
     if (id) dispatch(startInterview(id));
   }, [dispatch, id]);
 
-  useEffect(() => {
+  /*useEffect(() => {
     if (!userLocale && interview && interview.i18n) {
       setUserLocale('en');
     }
-  }, [interview])
+  }, [interview])*/
 
-  const translateClick = (event) => {
+  /*const translateClick = (event) => {
     setTranslateEl(event.currentTarget);
-  }
-  const changeLang = (locale) => {
+  }*/
+  /*const changeLang = (locale) => {
     setUserLocale(locale);
     setLocale(locale, interview.i18n);
     setTranslateEl(null);
-  };
+  };*/
   if (!interview || !interview.screen) return (
     <ContainerGrid container>
       <Grid item xs={12} md={9}>
@@ -155,7 +155,7 @@ const Interview = ({id}) => {
                   <ProgressBar stages={interview.progress.stages}/>
                 </Grid>
                 <Grid item xs={3}>
-                  <TranslationBtn i18n={interview.i18n} />
+                  <TranslationBtn id={id} langs={interview.langs} />
                 </Grid>
               </Grid>
             </Grid>

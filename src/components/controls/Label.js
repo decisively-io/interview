@@ -8,7 +8,9 @@ import { useTranslate } from '../../i18n';
 
 const headingStyles = {
   "Heading 4": "h5",
+  "Heading 3": "h4",
   "Heading 2": "h3",
+  "Heading 1": "h2",
   "Normal": "body1",
   "Comment": "body2"
 }

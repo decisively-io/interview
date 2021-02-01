@@ -29,7 +29,6 @@ export default (getMessages, initialLocale = 'en', polyglotOptions = {}) => {
       // so we systematically return a Promise for the messages
       // i18nProvider may return a Promise for language changes,
       resolve(getMessages(newLocale))).then((localeMessages) => {
-        console.log('changeLocale', localeMessages, additionalMessages)
       locale = newLocale;
       const newPolyglot = new Polyglot({
         locale: newLocale,

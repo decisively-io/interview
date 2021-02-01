@@ -90,6 +90,7 @@ const checkHideRule = (control, values) => {
   if (control.rules && control.rules.hide) {
     // Has a hide rule
     const curField = get(values, `${control.rules.hide.entityId}.${control.rules.hide.attributeId}`)
+
     if (!curField) return false; // Nothing to compare against
     switch (control.rules.hide.op) {
       case 'equals':

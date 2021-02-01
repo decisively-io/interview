@@ -1,8 +1,9 @@
-import { START_INTERVIEW_SUCCESS, NEXT_SCREEN_SUCCESS, PREV_SCREEN_SUCCESS, FINISH_INTERVIEW_SUCCESS, LOAD_ATTACHMENT_SUCCESS, LOAD_ATTACHMENT_LOADING, LOAD_ATTACHMENT_CANCEL, FETCH_START, FETCH_END, FETCH_ERROR, FETCH_CANCEL } from './interviewActions';
+import { START_INTERVIEW_SUCCESS, NEXT_SCREEN_SUCCESS, PREV_SCREEN_SUCCESS, FINISH_INTERVIEW_SUCCESS, LOAD_ATTACHMENT_SUCCESS, LOAD_ATTACHMENT_LOADING, LOAD_ATTACHMENT_CANCEL, FETCH_START, FETCH_END, FETCH_ERROR, FETCH_CANCEL, LOAD_LANGUAGE_SUCCESS } from './interviewActions';
 
 import set from 'lodash/set';
 import get from 'lodash/get';
 import pickBy from 'lodash/pickBy';
+import pick from 'lodash/pick';
 
 /**
  * Make the fetchedAt property non enumerable
@@ -83,7 +84,9 @@ export const addRecords = (
   return hideFetchedAt(records);
 };
 
-const initialState = {};//hideFetchedAt({ fetchedAt: {} });
+const initialState = {
+  i18n: {}
+};//hideFetchedAt({ fetchedAt: {} });
 
 const interviewReducer = (previousState = initialState, { payload, type, meta, releaseId }) => {
   let curAttachments = previousState.attachments || {};
@@ -120,6 +123,13 @@ const interviewReducer = (previousState = initialState, { payload, type, meta, r
         goal: action.payload.goal,
         i18n: action.payload.i18n
       }*/
+    case LOAD_LANGUAGE_SUCCESS:
+      let newI18N = {...previousState.i18n};
+      newI18N[payload.lang] = pick(payload.i18n, 'control', 'options', 'screen', 'stage');
+      return {
+        ...previousState,
+        i18n: newI18N
+      }
     case LOAD_ATTACHMENT_SUCCESS:
       set(curAttachments, `${action.payload.id}.loading`, false);
       set(curAttachments, `${action.payload.id}.value`, action.payload.value);

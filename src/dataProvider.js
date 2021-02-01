@@ -1,6 +1,6 @@
 import url from 'url';
 
-export default (options = {}) => {
+export default (options = {}, authProvider) => {
   const checkStatus = function checkStatus(res) {
     if (res.ok) {
       return res;
@@ -58,7 +58,7 @@ export default (options = {}) => {
 
   const mapRequest = (type, params) => {
     const { host } = options;
-
+    let baseUrl = host;
 
     if (type === 'finishInterview') {
       // TODO: Fix to only remove my current interview
@@ -72,7 +72,7 @@ export default (options = {}) => {
       if (!cookie[interview] || !cookie[interview].session) throw 'No current interview';
       const session = cookie[interview].session;
       const interviewId = cookie[interview].interviewId;
-      let url = `${host}/attachment/${id}`;
+      let url = `${baseUrl}/attachment/${id}`;
 
       // Okay now call back end
       return fetch(url, {
@@ -82,13 +82,20 @@ export default (options = {}) => {
           session: session
         })
       }).then(checkStatus).then((res) => res.json()).catch(parseError);
+    } else if (type === 'loadLanguage') {
+      const { lang, id } = params;
+      let url = `${baseUrl}/i18n/${id}/${lang}`;
+
+      return fetch(url, {
+        method: 'GET'
+      }).then(checkStatus).then((res) => res.json()).catch(parseError);
     } else {
       // A next or previous screen request
       const { id, data, goalState } = params;
 
 
 
-      let url = `${host}/progress/${id}`;
+      let url = `${baseUrl}/progress/${id}`;
       let body = {};
 
       const cookie = JSON.parse(localStorage.getItem('currentInterviews')) || {};

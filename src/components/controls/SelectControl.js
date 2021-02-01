@@ -36,7 +36,14 @@ const SelectControl = ({control, entity, count}) => {
   return (
     <FormControl fullWidth variant="outlined">
       <InputLabel ref={labelRef}>{translate(`control.${control.label}`)}</InputLabel>
-      <Select required={control.required} labelWidth={labelWidth} name={control.id} onChange={onChange} value={value || control.default || ''} error={control.errors && control.errors.length > 0}>
+      <Select 
+        id={control.attributeId}
+        required={control.required} 
+        labelWidth={labelWidth} 
+        name={control.id} 
+        onChange={onChange} 
+        value={value || control.default || ''} 
+        error={control.errors && control.errors.length > 0}>
         {control.options && control.options.filter((o) => o.hasOwnProperty('value')).map((option, index) => {
           return <MenuItem key={index} value={option.value}>{translate(`options.${(option.label || option.value)}`)}</MenuItem>
         })}

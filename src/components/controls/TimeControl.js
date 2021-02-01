@@ -18,7 +18,7 @@ const TimeControl = ({control, entity, count}) => {
 
   const onChange = (value) => {
     if (!value || isNaN(Date.parse(value))) return; // Invalid date
-    changeFieldValue(setFieldValue, control.attributeId, moment(value).utc().format('YYYY-MM-DDTHH:mm:ss'), entity, count);
+    changeFieldValue(setFieldValue, control.attributeId, moment(value).format('YYYY-MM-DDTHH:mm:ss'), entity, count);
   }
 
   let value = entity ? get(values, `${entity}.instances[${count}].${control.attributeId}.value`) : get(values, `global.${control.attributeId}.value`);
@@ -28,9 +28,12 @@ const TimeControl = ({control, entity, count}) => {
   }, [values]); 
 
   if (checkHideRule(control, values)) return null;
+  let showValue = (typeof value !== 'undefined' && value !== null) ? moment(value, 'YYYY-MM-DDTHH:mm:ss').toDate() : ((typeof control.default !== 'undefined' && control.default !== null) ? moment(control.default, 'YYYY-MM-DDTHH:mm:ss').toDate() : '');
+
   return (
     <FormControl fullWidth>
       <KeyboardTimePicker
+        id={control.attributeId}
         required={control.required} 
         placeholder="08:00 AM"
         inputVariant="outlined"
@@ -38,9 +41,9 @@ const TimeControl = ({control, entity, count}) => {
         variant="inline"
         name={control.id}
         label={translate(`control.${control.label}`)}
-        value={moment(value, 'HH:mm:ss').toDate() || control.default || null}
+        value={showValue}
         onChange={onChange}
-        autoOk={true}
+        //autoOk={true}
         fullWidth
       />
       { control.errors && control.errors.map((error, index) => (

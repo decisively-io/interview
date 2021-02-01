@@ -47,14 +47,14 @@ const CurrencyControl = ({control, entity, count}) => {
 
     if (value === null && typeof control.default !== 'undefined')  changeFieldValue(setFieldValue, control.attributeId, control.default, entity, count);
   }, [values]);
-  if (!values) return null;
+  //if (!values) return null;
 
   const allowNegative = control.minValue === "0.0" ? false : true;
 
   if (checkHideRule(control, values)) return null;
   return (
     <FormControl fullWidth>
-      <TextField variant="outlined" required={control.required}  onChange={onChange} label={translate(`control.${control.label}`)} value={value || control.default || ''} InputProps={{
+      <TextField id={control.attributeId} variant="outlined" required={control.required}  onChange={onChange} label={translate(`control.${control.label}`)} value={value || control.default || ''} InputProps={{
         inputComponent: CurrencyFormat,
         inputProps: { allowNegative: allowNegative}
       }} error={control.errors && control.errors.length > 0}/>

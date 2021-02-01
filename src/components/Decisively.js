@@ -5,13 +5,15 @@ import { Provider } from 'react-redux';
 import InterviewProvider from '../dataProvider';
 import { defaultI18nProvider, TranslationProvider } from '../i18n';
 import slice from 'lodash/slice';
+import { MuiPickersUtilsProvider } from '@material-ui/pickers';
+import DateFnsUtils from '@date-io/date-fns';
 
 const Decisively = ({host, anonymous = true, authProvider, locale = 'en', i18nProvider, messages, children}) => {
   const dataProvider = InterviewProvider({
     host: host
   });
   
-  const i18n = i18nProvider || defaultI18nProvider('en', messages || {}, {
+  const i18n = i18nProvider || defaultI18nProvider(locale, messages || {}, {
     allowMissing: true,
     onMissingKey: (t) => {
       // Remove the translation prefix
@@ -29,7 +31,9 @@ const Decisively = ({host, anonymous = true, authProvider, locale = 'en', i18nPr
   return (
     <Provider store={store}>
       <TranslationProvider i18nProvider={i18n}>
-        {children}
+        <MuiPickersUtilsProvider utils={DateFnsUtils}>
+          {children}
+        </MuiPickersUtilsProvider>
       </TranslationProvider>
     </Provider>
   )

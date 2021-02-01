@@ -4,6 +4,9 @@ module.exports = {
     'src/test-utils',
     'node_modules'
   ],
+  moduleNameMapper: {
+   // "prop-types$": '/node_modules/prop-types',
+  },
   "transformIgnorePatterns": [
     "^.+\\.module\\.(css|sass|scss)$",
     "node_modules/(?!(@material-ui|@babel)/)" // The modules that need to be transpiled. You might not need this.

@@ -7,13 +7,13 @@ import { renderControl, checkHideRule, willRender } from './index';
 
 const Container = ({container, entity, count}) => {
   const { values } = useFormikContext();
-
+  if (!container) return null;
   if (checkHideRule(container, values)) return null;
 
   if (container.orientation === 'vertical') {
     return (
       <Grid container spacing={6}>
-        {container.controls.map((sub_control, sub_index) => {
+        {container.controls && container.controls.map((sub_control, sub_index) => {
           if (!willRender(sub_control, values)) return null;
           return (
             <Grid item xs={12} key={sub_index}>
@@ -26,7 +26,7 @@ const Container = ({container, entity, count}) => {
   } else {
     return (
       <Grid container spacing={6}>
-        {container.controls.map((sub_control, sub_index) => {
+        {container.controls && container.controls.map((sub_control, sub_index) => {
           if (!willRender(sub_control, values)) return null;
           return (
             <Grid item xs key={sub_index}>

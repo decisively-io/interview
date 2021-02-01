@@ -36,8 +36,14 @@ const RadioControl = ({control, entity, count}) => {
   return (
     <FormControl component="fieldset">
       <FormLabel component="legend">{translate(`control.${control.label}`)}</FormLabel>
-      <RadioGroup row={control.orientation === 'horizontal' ? true : false} required={control.required} name={control.id} value={showValue} onChange={onChange}>
-        {control.options.map((option, index) => (
+      <RadioGroup 
+        id={control.attributeId} 
+        row={control.orientation === 'horizontal' ? true : false} 
+        required={control.required} 
+        name={control.id} 
+        value={showValue} 
+        onChange={onChange}>
+        {control.options && control.options.map((option, index) => (
           <FormControlLabel key={index} value={option.value} control={<Radio required={control.required} />} label={translate(`options.${option.label}`)}/>
         ))}
       </RadioGroup>

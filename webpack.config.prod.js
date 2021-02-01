@@ -14,12 +14,16 @@ module.exports = {
     'react-router': 'react-router',
     'react-router-dom': 'react-router-dom',
     'styled-components': 'styled-components',
-    '@material-ui/styles': '@material-ui/styles',
+    'connected-react-router': 'connected-react-router',
+    'redux': 'redux',
+    'redux-saga': 'redux-saga',
+    'redux-saga/effects': 'redux-saga/effects',
+    '@material-ui/styles': '@material-ui/core/styles',
     //'@material-ui/core': '@material-ui/core',
     formik: 'formik',
     'react-number-format': 'react-number-format'
   },
-    /^@material-ui\/(core|icons)[\/a-zA-Z]*/
+    /^@material-ui\/(core|icons|styles|lab|picker|system)[\/a-zA-Z]*/
   ],
   resolve: {
     alias: {

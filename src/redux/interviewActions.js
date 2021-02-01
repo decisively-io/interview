@@ -83,5 +83,13 @@ export const hideNotification = () => ({
   type: HIDE_NOTIFICATION,
 });
 
+export const LOAD_LANGUAGE = 'DP/LOAD_LANGUAGE';
+export const loadLanguage = (lang, id) => ({
+  type: LOAD_LANGUAGE,
+  lang,
+  id
+});
+export const LOAD_LANGUAGE_SUCCESS = 'DP/LOAD_LANGUAGE_SUCCESS';
+
 
 
