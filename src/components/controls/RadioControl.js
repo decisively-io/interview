@@ -37,7 +37,7 @@ const RadioControl = ({control, entity, count}) => {
     <FormControl component="fieldset">
       <FormLabel component="legend">{translate(`control.${control.label}`)}</FormLabel>
       <RadioGroup 
-        id={control.attributeId} 
+        id={entity ? `${entity}_${count}_${control.attributeId}` : control.attributeId }
         row={control.orientation === 'horizontal' ? true : false} 
         required={control.required} 
         name={control.id} 

@@ -1,6 +1,7 @@
 import React, {Fragment} from 'react';
 import { renderControl, getControls, checkHideRule } from './index';
 import styled from 'styled-components';
+import { useTranslate } from '../../i18n';
 
 import {
   Grid,
@@ -22,7 +23,6 @@ const EntityRow = ({index, tmpl, instance, parent, arrayHelpers}) => {
   const removeHandler = () => {
     arrayHelpers.remove(index)
   }
-  console.log('ENTITY ROW');
       
   const entity_controls = getControls(tmpl, parent.relationshipId, index);
   //if (entity_control)
@@ -48,22 +48,20 @@ const EntityRow = ({index, tmpl, instance, parent, arrayHelpers}) => {
 }
 
 const RelationshipControl = ({control, index}) => {
-  
+  const translate = useTranslate();
   const { values, setFieldValue } = useFormikContext();
 
   if (checkHideRule(control, values)) {
     // Should also remove any entries
-    console.log('change values', control);
     //setFieldValue(`${control.relationshipId}.instances`, [], false);
     return null;
   }
-
-  console.log('control', values, control.relationshipId);
+  if (!control.template || !control.template.values || !control.template.controls) return null;
   return (
     <Grid container spacing={6}>
       <Grid item xs={12}>
         <Typography variant="h5">
-          {startCase(control.label)}
+          {startCase(translate(`control.${control.label}`))}
         </Typography>
       </Grid>
       <Grid item xs={12}>
@@ -76,7 +74,7 @@ const RelationshipControl = ({control, index}) => {
                 <EntityRow key={index} index={index} tmpl={control.template.controls} instance={instance} parent={control} arrayHelpers={arrayHelpers}/>
               ))}
               <Wrapper>
-                <Button onClick={() => arrayHelpers.push(control.template.values)} aria-label="add" variant="contained">
+                <Button name="add" onClick={() => arrayHelpers.push(control.template.values)} aria-label="add" variant="contained">
                   {control.addLabel || <AddCircleIcon />}
                 </Button>
               </Wrapper>

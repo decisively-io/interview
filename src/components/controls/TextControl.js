@@ -36,12 +36,11 @@ const TextControl = ({control, entity, count}) => {
     const subst = ``;
     label = label.replace(replace, subst);
   }
-
   if (checkHideRule(control, values)) return null;
   return (
     <FormControl fullWidth>
       <TextField 
-        id={control.attributeId}
+        id={entity ? `${entity}_${count}_${control.attributeId}` : control.attributeId }
         variant="outlined" 
         required={control.required} 
         name={control.id} 

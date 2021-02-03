@@ -54,10 +54,18 @@ const CurrencyControl = ({control, entity, count}) => {
   if (checkHideRule(control, values)) return null;
   return (
     <FormControl fullWidth>
-      <TextField id={control.attributeId} variant="outlined" required={control.required}  onChange={onChange} label={translate(`control.${control.label}`)} value={value || control.default || ''} InputProps={{
-        inputComponent: CurrencyFormat,
-        inputProps: { allowNegative: allowNegative}
-      }} error={control.errors && control.errors.length > 0}/>
+      <TextField       
+        id={entity ? `${entity}_${count}_${control.attributeId}` : control.attributeId }
+        variant="outlined" 
+        required={control.required}  
+        onChange={onChange} 
+        label={translate(`control.${control.label}`)} 
+        value={value || control.default || ''} 
+        InputProps={{
+          inputComponent: CurrencyFormat,
+          inputProps: { allowNegative: allowNegative}
+        }} 
+        error={control.errors && control.errors.length > 0}/>
       { control.errors && control.errors.map((error, index) => (
         <FormHelperText key={index}>{error}</FormHelperText>
       ))}

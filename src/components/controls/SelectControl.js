@@ -37,7 +37,7 @@ const SelectControl = ({control, entity, count}) => {
     <FormControl fullWidth variant="outlined">
       <InputLabel ref={labelRef}>{translate(`control.${control.label}`)}</InputLabel>
       <Select 
-        id={control.attributeId}
+        id={entity ? `${entity}_${count}_${control.attributeId}` : control.attributeId }
         required={control.required} 
         labelWidth={labelWidth} 
         name={control.id} 

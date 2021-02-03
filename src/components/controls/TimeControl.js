@@ -33,7 +33,7 @@ const TimeControl = ({control, entity, count}) => {
   return (
     <FormControl fullWidth>
       <KeyboardTimePicker
-        id={control.attributeId}
+        id={entity ? `${entity}_${count}_${control.attributeId}` : control.attributeId }
         required={control.required} 
         placeholder="08:00 AM"
         inputVariant="outlined"

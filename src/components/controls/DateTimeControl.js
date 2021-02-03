@@ -53,7 +53,7 @@ const DateTimeControl = ({control, entity, count, editMode}) => {
   return (
     <FormControl fullWidth>
       <KeyboardDateTimePicker
-        id={control.attributeId}
+        id={entity ? `${entity}_${count}_${control.attributeId}` : control.attributeId }
         required={control.required} 
         disableToolbar
         inputVariant="outlined"
