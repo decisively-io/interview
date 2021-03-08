@@ -1,6 +1,6 @@
 {
   "name": "@decisively-io/interview",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "Decisively Interview React SDK",
   "repository": "git://github.com/decisively-io/interview.git",
   "main": "dist/main.js",
