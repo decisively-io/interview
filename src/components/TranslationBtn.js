@@ -152,7 +152,6 @@ const TranslationBtn = ({langs, id}) => {
   };
 
   if (!langs) return null;
-
   return (
     <TranslateContainer>
       { loading ? <CircularProgress /> : (
@@ -166,7 +165,7 @@ const TranslationBtn = ({langs, id}) => {
             open={Boolean(translateEl)}
             onClose={() => setTranslateEl(null)}
             >
-            { langs.map((lang, index) => <MenuItem key={index} onClick={() => changeLang(lang)}>{languageNames[lang]}</MenuItem>)}
+            { langs.map && langs.map((lang, index) => <MenuItem key={index} onClick={() => changeLang(lang)}>{languageNames[lang]}</MenuItem>)}
           </Menu>
         </Fragment>
       )}

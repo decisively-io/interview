@@ -117,6 +117,7 @@ const willRender = (control, values) => {
   else return true;
 }
 const changeFieldValue = (setFieldValue, field, value, entity, count) => {
+  if (!setFieldValue) return null;
   if (entity) {
     setFieldValue(`${entity}.instances[${count}].${field}.value`, value);
   } else {
